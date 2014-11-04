@@ -1,7 +1,6 @@
 /*!
  * Name: placeholder-polyfill - jQuery polyfill for the HTML5 placeholder attribute.
  * Version: v0.0.1
- * Created: 2014-10-20
  * Homepage: https://github.com/woneob/placeholder-polyfill
  * License: MIT
  */

@@ -5,7 +5,6 @@ module.exports = function(grunt) {
 			'/*!',
 			' * Name: <%= pkg.name %> - <%= pkg.description %>',
 			' * Version: v<%= pkg.version %>',
-			' * Created: <%= grunt.template.today("yyyy-mm-dd") %>',
 			' * Homepage: <%= pkg.homepage %>',
 			' * License: <%= pkg.license %>',
 			' */\n\n'

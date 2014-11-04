@@ -12,7 +12,10 @@ module.exports = function(grunt) {
 		jshint: {
 			hint: {
 				files: {
-					src: 'src/**/*.js'
+					src: [
+						'src/scripts/**/*.js',
+						'!src/scripts/**/*.min.js'
+					]
 				}
 			}
 		},

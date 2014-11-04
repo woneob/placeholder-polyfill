@@ -87,6 +87,50 @@ module.exports = function(grunt) {
 					extDot: 'last'
 				}]
 			}
+		},
+		connect: {
+			server: {
+				options: {
+					port: 9001,
+					base: 'dist/gh-pages/'
+				}
+			}
+		},
+		watch: {
+			options: {
+				spawn: false,
+			},
+			scripts: {
+				files: [
+					'src/scripts/**/*.js',
+					'!src/scripts/**/*.min.js'
+				],
+				tasks: [
+					'jshint',
+					'clean:scripts',
+					'uglify'
+				]
+			},
+			minimizedJs: {
+				files: 'src/scripts/**/*.min.js',
+				tasks: 'copy:minimizedJs'
+			},
+			less: {
+				files: 'src/styles/**/*.less',
+				tasks: [
+					'clean:styles',
+					'less'
+				]
+			},
+			grunt: {
+				files: 'Gruntfile.js',
+				tasks: [
+					'jshint',
+					'clean',
+					'uglify',
+					'less'
+				]
+			}
 		}
 	});
 
@@ -94,11 +138,22 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('default', [
 		'jshint',
 		'clean',
 		'uglify',
 		'less'
+	]);
+
+	grunt.registerTask('server', [
+		'jshint',
+		'clean',
+		'uglify',
+		'less',
+		'connect',
+		'watch'
 	]);
 };

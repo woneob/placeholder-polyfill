@@ -70,6 +70,16 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+		'compile-handlebars': {
+			index: {
+				template: 'src/index.handlebars',
+				templateData: [
+					'package.json',
+					'src/data/index.json'
+				],
+				output: 'dist/gh-pages/index.html'
+			}
+		},
 		less: {
 			style: {
 				options: {
@@ -118,6 +128,17 @@ module.exports = function(grunt) {
 				files: 'src/scripts/**/*.min.js',
 				tasks: 'copy:minimizedJs'
 			},
+			html: {
+				files: 'src/**/*.handlebars',
+				tasks: [
+					'clean:html',
+					'compile-handlebars'
+				]
+			},
+			rootCfg: {
+				files: ['src/*', '!src/*.handlebars'],
+				tasks: ['copy:rootCfg']
+			},
 			less: {
 				files: 'src/styles/**/*.less',
 				tasks: [
@@ -131,6 +152,7 @@ module.exports = function(grunt) {
 					'jshint',
 					'clean',
 					'uglify',
+					'compile-handlebars',
 					'less'
 				]
 			}
@@ -141,6 +163,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-compile-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -148,7 +171,8 @@ module.exports = function(grunt) {
 		'jshint',
 		'clean',
 		'uglify',
-		'less'
+		'less',
+		'compile-handlebars',
 	]);
 
 	grunt.registerTask('server', [
@@ -156,6 +180,7 @@ module.exports = function(grunt) {
 		'clean',
 		'uglify',
 		'less',
+		'compile-handlebars',
 		'connect',
 		'watch'
 	]);

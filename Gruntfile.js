@@ -20,7 +20,10 @@ module.exports = function(grunt) {
 			options: {
 				force: true
 			},
-			dist: 'dist/**/*.*'
+			scripts: "dist/**/*.js",
+			images: "dist/gh-pages/images/**/*.*",
+			html: "dist/gh-pages/**/*.html",
+			styles: "dist/gh-pages/styles/**/*.css"
 		},
 		uglify: {
 			beautify: {

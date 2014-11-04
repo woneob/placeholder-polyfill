@@ -101,6 +101,26 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		copy: {
+			minimizedJs: {
+				expand: true,
+				cwd: 'src/scripts/',
+				src: '**/*.min.js',
+				dest: 'dist/gh-pages/scripts/'
+			},
+			images: {
+				expand: true,
+				cwd: 'src/images/',
+				src: '**/*.*',
+				dest: 'dist/gh-pages/images/'
+			},
+			rootCfg: {
+				expand: true,
+				cwd: 'src/',
+				src: ['*', '!*.handlebars'],
+				dest: 'dist/gh-pages/'
+			}
+		},
 		connect: {
 			server: {
 				options: {
@@ -135,6 +155,13 @@ module.exports = function(grunt) {
 					'compile-handlebars'
 				]
 			},
+			images: {
+				files: 'src/images/**/*.*',
+				tasks: [
+					'clean:images',
+					'copy:images'
+				]
+			},
 			rootCfg: {
 				files: ['src/*', '!src/*.handlebars'],
 				tasks: ['copy:rootCfg']
@@ -146,6 +173,10 @@ module.exports = function(grunt) {
 					'less'
 				]
 			},
+			rootCfg: {
+				files: ['src/*', '!src/*.handlebars'],
+				tasks: ['copy:rootCfg']
+			},
 			grunt: {
 				files: 'Gruntfile.js',
 				tasks: [
@@ -153,6 +184,7 @@ module.exports = function(grunt) {
 					'clean',
 					'uglify',
 					'compile-handlebars',
+					'copy',
 					'less'
 				]
 			}
@@ -163,6 +195,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-compile-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
@@ -173,6 +206,7 @@ module.exports = function(grunt) {
 		'uglify',
 		'less',
 		'compile-handlebars',
+		'copy'
 	]);
 
 	grunt.registerTask('server', [
@@ -181,6 +215,7 @@ module.exports = function(grunt) {
 		'uglify',
 		'less',
 		'compile-handlebars',
+		'copy',
 		'connect',
 		'watch'
 	]);

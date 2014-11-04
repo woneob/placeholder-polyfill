@@ -188,6 +188,13 @@ module.exports = function(grunt) {
 					'less'
 				]
 			}
+		},
+		'gh-pages': {
+			options: {
+				base: 'dist/gh-pages/',
+				message: 'Auto-generated commit:'
+			},
+			src: '**/*'
 		}
 	});
 
@@ -199,6 +206,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-compile-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-gh-pages');
 
 	grunt.registerTask('default', [
 		'jshint',
@@ -218,5 +226,9 @@ module.exports = function(grunt) {
 		'copy',
 		'connect',
 		'watch'
+	]);
+
+	grunt.registerTask('pages', [
+		'gh-pages'
 	]);
 };

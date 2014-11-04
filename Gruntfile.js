@@ -34,9 +34,9 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: 'src/',
-					src: ['**/*.js', '!**/*.min.js'],
-					dest: 'dist/'
+					cwd: 'src/scripts/placeholder/',
+					src: '**/*.js',
+					dest: 'dist/placeholder/'
 				}]
 			},
 			minify: {
@@ -44,14 +44,24 @@ module.exports = function(grunt) {
 					banner: '<%= banner %>',
 					footer: '\n'
 				},
-				files: [{
-					expand: true,
-					cwd: 'src/',
-					src: ['**/*.js', '!**/*.min.js'],
-					dest: 'dist/',
-					ext: '.min.js',
-					extDot: 'last'
-				}]
+				files: [
+					{
+						expand: true,
+						cwd: 'src/scripts/',
+						src: ['**/*.js', '!**/*.min.js'],
+						dest: 'dist/gh-pages/scripts/',
+						ext: '.min.js',
+						extDot: 'last'
+					},
+					{
+						expand: true,
+						cwd: 'src/scripts/placeholder/',
+						src: '**/*.js',
+						dest: 'dist/placeholder/',
+						ext: '.min.js',
+						extDot: 'last'
+					}
+				]
 			}
 		}
 	});

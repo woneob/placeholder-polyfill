@@ -63,11 +63,39 @@ module.exports = function(grunt) {
 					}
 				]
 			}
+		},
+		less: {
+			style: {
+				options: {
+					compress: false,
+					cleancss: true,
+					banner: '<%= banner %>',
+					cleancssOptions: {
+						keepBreaks: true,
+						keepSpecialComments: 1
+					}
+				},
+				files: [{
+					expand: true,
+					cwd: 'src/styles/',
+					src: ['**/*.less', '!**/_*.less'],
+					dest: 'dist/gh-pages/styles/',
+					ext: '.css',
+					extDot: 'last'
+				}]
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.registerTask('default', ['jshint', 'clean', 'uglify']);
+	grunt.loadNpmTasks('grunt-contrib-less');
+
+	grunt.registerTask('default', [
+		'jshint',
+		'clean',
+		'uglify',
+		'less'
+	]);
 };
